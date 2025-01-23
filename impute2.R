@@ -1,7 +1,4 @@
 # Include your code here for you second imputation method
-# Load database
-df <- import("https://github.com/ignaciomsarmiento/datasets/blob/main/GEIH_sample1.Rds?raw=true")
-db <- as_tibble(df) ## from dataframe to tibble
 
 # transform categorical to factor
 db$maxEducLevel<- factor(db$maxEducLevel)
