@@ -1,9 +1,17 @@
-# Include here your code for your first chosen imputation method
-
-
-# calculating the most commun value of y_salary_m. 
-mode_edu <- as.numeric(names(sort(table(db$y_salary_m), decreasing = TRUE)[1]))
-
-# Imputing the missing value. 
+# Imputing the missing values with the median
 db <- db  %>%
-  mutate(y_salary_m = ifelse(is.na(y_salary_m) == TRUE, mode_edu , maxEducLevel))
+  mutate(ingtot = ifelse(is.na(ingtot) == TRUE, median(db$ingtot, na.rm = TRUE) , ingtot))
+# replace values:
+db %>% select(directorio,y_total_m) %>% tail()
+#Replace the missing values with mean 
+db = db %>% 
+     group_by(directorio) %>% 
+     mutate(mean_y_total_m = mean(y_total_m,na.rm=T))
+db %>% select(directorio,y_total_m,mean_y_total_m) %>% tail()
+
+db = db %>%
+     mutate(y_total_m = ifelse(test = is.na(y_total_m)==T,
+                               yes = mean_y_total_m,
+                               no = y_total_m))
+
+db %>% select(directorio,y_total_m,mean_y_total_m) %>% tail()
