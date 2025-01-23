@@ -6,4 +6,4 @@ mode_edu <- as.numeric(names(sort(table(db$y_salary_m), decreasing = TRUE)[1]))
 
 # Imputing the missing value. 
 db <- db  %>%
-  mutate(maxEducLevel = ifelse(is.na(y_salary_m) == TRUE, mode_edu , maxEducLevel))
+  mutate(y_salary_m = ifelse(is.na(y_salary_m) == TRUE, mode_edu , maxEducLevel))
